@@ -12,6 +12,19 @@ flag = pygame.transform.scale(flag, (50, 50))
 
 game = 0
 
+colors = {
+    -1: (0, 0, 0),
+    0: (0, 0, 0),
+    1: (0, 0, 255),      # Blue
+    2: (0, 128, 0),      # Green
+    3: (255, 0, 0),      # Red
+    4: (0, 0, 128),      # Dark blue
+    5: (128, 0, 0),      # Dark red
+    6: (0, 128, 128),    # Teal
+    7: (0, 0, 0),        # Black
+    8: (128, 128, 128)   # Dark gray
+}
+
 def generate_grid(bombs = 10):
     grid = [[0 for _ in range(10)] for _ in range(10)]
     covers = [[1 for _ in range(10)] for _ in range(10)]
@@ -93,7 +106,8 @@ while True:
         for j in range(10):
             pygame.draw.rect(screen, (0, 0, 0), (i * 50, j * 50, 50, 50), width = 1)
             if grid[j][i] != 0:
-                text = font.render(str(grid[j][i]), True, (0, 0, 0))
+                num = grid[j][i]
+                text = font.render(str(num), True, colors[num])
                 textRect = text.get_rect()
                 textRect.center = (i * 50 + 25, j * 50 + 25)
                 screen.blit(text, textRect)
